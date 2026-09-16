@@ -124,7 +124,7 @@
     <div class="w-24 h-24 bg-white/5 backdrop-blur-md rounded-[32px] flex justify-center items-center shadow-lg border border-white/10 mb-6 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
         <!-- INI KODE LOGO BARUNYA -->
-        <img src="logom.png" alt="Logo AMTAS" class="w-16 h-16 object-contain relative z-10" />
+        <img src="./logom.png" alt="Logo AMTAS" class="w-16 h-16 object-contain relative z-10" />
     </div>
                     <h1 class="text-1xl font-bold text-white tracking-tight text-center leading-tight shadow-black/10 drop-shadow-md">AMTAS<br>Aplikasi Manajemen Tabungan & Syahriyah Madin Al-Muttaqin</h1>
                     <p class="text-[10px] text-teal-200/70 font-mono mt-3 tracking-[0.2em] uppercase">Silahkan pilih Aplikasi di bawah ini</p>
