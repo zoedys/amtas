@@ -1,0 +1,21 @@
+{
+  "name": "AMTAS Al-Muttaqin",
+  "short_name": "AMTAS",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#2563eb",
+  "description": "Aplikasi Manajemen Tabungan dan Syahriyah Madin Al-Muttaqin",
+  "icons": [
+    {
+      "src": "logom.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logom.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
