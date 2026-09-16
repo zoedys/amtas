@@ -223,7 +223,7 @@
                                 <span class="material-symbols-outlined text-lg">mosque</span>
                                 <h2 class="text-base font-bold">Syahriyah AMTAS</h2>
                             </div>
-                            <p class="text-xs text-emerald-100 font-medium">Hai, <span id="s-user-name">Admin</span></p>
+                            <p class="text-xs text-emerald-100 font-medium">Assalamu'alaikum, <span id="s-user-name">Admin</span></p>
                         </div>
                         <div class="flex gap-1 bg-white/10 p-1 rounded-2xl items-center">
                             <button onclick="toggleSyahDarkMode()" class="p-1.5 hover:bg-white/20 rounded-xl transition text-emerald-100" title="Ganti Mode">
@@ -1544,7 +1544,7 @@
         <div className={`flex flex-col h-full relative pb-16 transition-colors duration-300 ${isDarkMode ? 'bg-slate-900 text-slate-100' : 'bg-slate-50 text-slate-800'}`}>
           <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white p-5 rounded-b-3xl shadow-lg z-10 shrink-0">
             <div className="flex justify-between items-start">
-              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18} /><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Hai, {currentUser?.name}</p></div>
+              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18} /><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Assalamu'alaikum, {currentUser?.name}</p></div>
               <div className="flex gap-1 bg-white/10 p-1 rounded-2xl items-center">
                 <button onClick={toggleDarkMode} className="p-1.5 hover:bg-white/20 rounded-xl transition text-blue-100">{isDarkMode ? <Sun size={18} className="text-amber-400"/> : <Moon size={18}/>}</button>
                 <button onClick={onLogout} className="p-1.5 hover:bg-red-500/80 rounded-xl transition text-red-200" title="Keluar"><LogOut size={18}/></button>
@@ -1887,7 +1887,7 @@
 
           <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white p-5 rounded-b-3xl shadow-lg z-10 shrink-0">
             <div className="flex justify-between items-center">
-              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18}/><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Hai, {user.name}</p></div>
+              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18}/><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Assalamu'alaikum, {user.name}</p></div>
               <div className="flex gap-1 bg-white/10 p-1 rounded-2xl items-center">
                 <button onClick={toggleDarkMode} className="p-1.5 hover:bg-white/20 rounded-xl transition text-blue-100">{isDarkMode?<Sun size={18} className="text-amber-400"/>:<Moon size={18}/>}</button>
                 <button onClick={onLogout} className="p-1.5 hover:bg-red-500/80 rounded-xl transition text-red-200" title="Keluar"><LogOut size={18}/></button>
