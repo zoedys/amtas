@@ -146,13 +146,13 @@
                         <div class="bg-gradient-to-br from-blue-400 to-blue-600 p-3.5 rounded-2xl shadow-inner group-hover:scale-110 transition-transform relative z-10"><span class="material-symbols-outlined text-white">account_balance_wallet</span></div>
                         <div class="text-left flex-1 relative z-10">
                             <h2 class="text-white font-bold text-lg">Tabungan Digital</h2>
-                            <p class="text-blue-200/70 text-xs">Kelola Tabungan Jama'ah</p>
+                            <p class="text-blue-200/70 text-xs">Kelola Tabungan Santri</p>
                         </div>
                         <span class="material-symbols-outlined text-white/30 relative z-10">chevron_right</span>
                     </button>
                 </div>
 
-                <div class="absolute bottom-6 text-[9px] text-slate-500 font-medium">© 2024 AMTAS Madin Al-Muttaqin</div>
+                <div class="absolute bottom-6 text-[9px] text-slate-500 font-medium">© 2026 AMTAS Madin Al-Muttaqin By Zoedys</div>
             </div>
         </div>
 
@@ -224,7 +224,7 @@
                                 <span class="material-symbols-outlined text-lg">mosque</span>
                                 <h2 class="text-base font-bold">Syahriyah AMTAS</h2>
                             </div>
-                            <p class="text-xs text-emerald-100 font-medium">Hai, <span id="s-user-name">Admin</span></p>
+                            <p class="text-xs text-emerald-100 font-medium">Assalamu'alaikum, <span id="s-user-name">Admin</span></p>
                         </div>
                         <div class="flex gap-1 bg-white/10 p-1 rounded-2xl items-center">
                             <button onclick="toggleSyahDarkMode()" class="p-1.5 hover:bg-white/20 rounded-xl transition text-emerald-100" title="Ganti Mode">
@@ -1470,7 +1470,7 @@
         const inputName = newStudent.name.trim();
         const inputUsername = newStudent.username.trim();
 
-        if (students.some(s => s.name.toLowerCase() === inputName.toLowerCase())) return alert(`Gagal: Nama Jama'ah "${inputName}" sudah ada!`);
+        if (students.some(s => s.name.toLowerCase() === inputName.toLowerCase())) return alert(`Gagal: Nama Santri "${inputName}" sudah ada!`);
         if (users.some(u => u.username.toLowerCase() === inputUsername.toLowerCase())) return alert(`Gagal: Username "${inputUsername}" sudah dipakai!`);
 
         const nextID = `JM-${String(students.length + 1).padStart(3, '0')}`;
@@ -1504,7 +1504,7 @@
       const exportPDF = () => {
         const totalIn = filteredHistory.filter(t => t.type === 'in').reduce((acc, t) => acc + t.amount, 0);
         const totalOut = filteredHistory.filter(t => t.type === 'out').reduce((acc, t) => acc + t.amount, 0);
-        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Laporan Tabungan AMTAS Al-Muttaqin</h2><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">No</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jama'ah</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;text-align:right;">Nominal</th></tr></thead><tbody>${[...filteredHistory].sort((a,b)=>new Date(a.date)-new Date(b.date)).map((t,i)=>`<tr><td style="border:1px solid #ccc;padding:8px;">${i+1}</td><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${students.find(s=>s.id===t.studentId)?.name||'-'}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setoran':'Penarikan'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;color:${t.type==='in'?'green':'red'}">${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="5" style="border:1px solid #ccc;padding:8px;text-align:right;">Total Saldo Bersih:</td><td style="border:1px solid #ccc;padding:8px;text-align:right;"><b>${formatRupiah(totalIn-totalOut)}</b></td></tr></tfoot></table></div>`;
+        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Laporan Tabungan AMTAS Al-Muttaqin</h2><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">No</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Santri</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;text-align:right;">Nominal</th></tr></thead><tbody>${[...filteredHistory].sort((a,b)=>new Date(a.date)-new Date(b.date)).map((t,i)=>`<tr><td style="border:1px solid #ccc;padding:8px;">${i+1}</td><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${students.find(s=>s.id===t.studentId)?.name||'-'}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setoran':'Penarikan'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;color:${t.type==='in'?'green':'red'}">${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="5" style="border:1px solid #ccc;padding:8px;text-align:right;">Total Saldo Bersih:</td><td style="border:1px solid #ccc;padding:8px;text-align:right;"><b>${formatRupiah(totalIn-totalOut)}</b></td></tr></tfoot></table></div>`;
         printHTMLContent(html);
       };
 
@@ -1534,7 +1534,7 @@
         <div className={`flex flex-col h-full relative pb-16 transition-colors duration-300 ${isDarkMode ? 'bg-slate-900 text-slate-100' : 'bg-slate-50 text-slate-800'}`}>
           <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white p-5 rounded-b-3xl shadow-lg z-10 shrink-0">
             <div className="flex justify-between items-start">
-              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18} /><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Hai, {currentUser?.name}</p></div>
+              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18} /><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Assalamu'alaikum, {currentUser?.name}</p></div>
               <div className="flex gap-1 bg-white/10 p-1 rounded-2xl items-center">
                 <button onClick={toggleDarkMode} className="p-1.5 hover:bg-white/20 rounded-xl transition text-blue-100">{isDarkMode ? <Sun size={18} className="text-amber-400"/> : <Moon size={18}/>}</button>
                 <button onClick={onLogout} className="p-1.5 hover:bg-red-500/80 rounded-xl transition text-red-200" title="Keluar"><LogOut size={18}/></button>
@@ -1547,7 +1547,7 @@
                 <div className="space-y-4">
                   <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-800 p-6 rounded-3xl text-white shadow-xl relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-36 h-36 bg-white/10 rounded-full -mr-10 -mt-10 blur-xl"></div>
-                    <p className="text-xs text-blue-100 mb-1">Total Tabungan Jama'ah</p>
+                    <p className="text-xs text-blue-100 mb-1">Total Tabungan Santri</p>
                     <h1 className="text-3xl font-extrabold tracking-tight mb-2">{formatRupiah(totalJamaahBalance)}</h1>
                   </div>
 
@@ -1569,8 +1569,8 @@
                   </div>
 
                   <div>
-                    <div className="flex justify-between items-center mb-3"><h3 className="font-bold text-base">Daftar Jama'ah</h3>{isAdmin && <button onClick={() => setShowAddStudent(true)} className="bg-blue-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-md active:scale-95 transition"><Plus size={16}/> Jama'ah</button>}</div>
-                    <div className="relative mb-3"><Search className="absolute left-3 top-3 text-slate-400" size={18}/><input type="text" placeholder="Cari jama'ah..." value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} className={`w-full border rounded-xl py-2.5 pl-10 pr-4 text-xs outline-none focus:border-blue-500 transition ${isDarkMode?'bg-slate-800 border-slate-700 text-white':'bg-white border-slate-300 text-slate-800'}`} /></div>
+                    <div className="flex justify-between items-center mb-3"><h3 className="font-bold text-base">Daftar Santri</h3>{isAdmin && <button onClick={() => setShowAddStudent(true)} className="bg-blue-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-md active:scale-95 transition"><Plus size={16}/> Santri</button>}</div>
+                    <div className="relative mb-3"><Search className="absolute left-3 top-3 text-slate-400" size={18}/><input type="text" placeholder="Cari Santri..." value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} className={`w-full border rounded-xl py-2.5 pl-10 pr-4 text-xs outline-none focus:border-blue-500 transition ${isDarkMode?'bg-slate-800 border-slate-700 text-white':'bg-white border-slate-300 text-slate-800'}`} /></div>
                     <div className="space-y-2.5">
                       {filteredStudents.map(student => (
                         <div key={student.id} onClick={() => setSelectedStudent(student)} className={`p-3.5 rounded-2xl border flex items-center justify-between cursor-pointer active:scale-[0.98] transition ${isDarkMode ? 'bg-slate-800 border-slate-700 hover:bg-slate-700' : 'bg-white border-slate-200 hover:shadow-md'}`}>
@@ -1612,7 +1612,7 @@
 
              {activeTab === 'insight' && (
                 <div className={`p-5 rounded-2xl border shadow-sm ${isDarkMode?'bg-slate-800 border-slate-700':'bg-white border-slate-200'}`}>
-                   <div className="flex items-center gap-3 mb-5 border-b border-slate-200 dark:border-slate-700 pb-3"><div className="bg-amber-100 dark:bg-amber-900/30 p-2 rounded-xl"><Trophy className="text-amber-600 dark:text-amber-400" size={22}/></div><div><h3 className="font-bold text-sm">Top Tabungan Jama'ah</h3></div></div>
+                   <div className="flex items-center gap-3 mb-5 border-b border-slate-200 dark:border-slate-700 pb-3"><div className="bg-amber-100 dark:bg-amber-900/30 p-2 rounded-xl"><Trophy className="text-amber-600 dark:text-amber-400" size={22}/></div><div><h3 className="font-bold text-sm">Top Tabungan Santri</h3></div></div>
                    <div className="space-y-4">
                       {allSortedStudents.map((s, idx) => (
                          <div key={s.id} className="relative">
@@ -1660,7 +1660,7 @@
                    )}
 
                    <div className="p-2 space-y-1">
-                      {isAdmin && <button onClick={()=>setShowResetJamaahModal(true)} className="w-full flex justify-between items-center p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl text-left transition"><div className="flex items-center gap-3"><div className="bg-indigo-100 dark:bg-indigo-900/30 p-2 rounded-lg text-indigo-600"><UserCheck size={18}/></div><div><p className="text-xs font-bold">Atur Ulang Akses Jama'ah</p></div></div><ChevronRight size={16} className="text-slate-400"/></button>}
+                      {isAdmin && <button onClick={()=>setShowResetJamaahModal(true)} className="w-full flex justify-between items-center p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl text-left transition"><div className="flex items-center gap-3"><div className="bg-indigo-100 dark:bg-indigo-900/30 p-2 rounded-lg text-indigo-600"><UserCheck size={18}/></div><div><p className="text-xs font-bold">Atur Ulang Akses Santri</p></div></div><ChevronRight size={16} className="text-slate-400"/></button>}
                    </div>
                 </div>
              )}
@@ -1680,7 +1680,7 @@
             <div className="absolute inset-0 z-50 bg-black/60 flex flex-col justify-end"><div className={`rounded-t-3xl p-6 h-[70%] ${isDarkMode?'bg-slate-900':'bg-white'}`}><div className="flex justify-between items-center mb-5"><h3 className="font-bold">Edit Pengumuman</h3><button onClick={()=>setShowAnnouncementModal(false)} className="text-xs text-slate-500">Batal</button></div><form onSubmit={handleSaveAnnouncement} className="space-y-4"><textarea rows="5" className={inputClass} value={editAnnText} onChange={e=>setEditAnnText(e.target.value)} required/><label className="flex items-center gap-2 text-xs font-bold mt-2"><input type="checkbox" checked={editAnnActive} onChange={e=>setEditAnnActive(e.target.checked)}/> Tampilkan Pengumuman ini di Beranda</label><button type="submit" className="w-full py-3.5 bg-indigo-600 text-white rounded-xl text-xs font-bold mt-4 shadow-md">Simpan & Siarkan</button></form></div></div>
           )}
           {showAddStudent && (
-            <div className="absolute inset-0 z-50 bg-black/60 flex flex-col justify-end"><div className={`rounded-t-3xl p-6 h-[85%] ${isDarkMode?'bg-slate-900':'bg-white'}`}><div className="flex justify-between items-center mb-5"><h3 className="font-bold">Tambah Jama'ah Baru</h3><button onClick={()=>setShowAddStudent(false)} className="text-xs text-slate-500">Batal</button></div><form onSubmit={handleAddStudentSubmit} className="space-y-4">
+            <div className="absolute inset-0 z-50 bg-black/60 flex flex-col justify-end"><div className={`rounded-t-3xl p-6 h-[85%] ${isDarkMode?'bg-slate-900':'bg-white'}`}><div className="flex justify-between items-center mb-5"><h3 className="font-bold">Tambah Santri Baru</h3><button onClick={()=>setShowAddStudent(false)} className="text-xs text-slate-500">Batal</button></div><form onSubmit={handleAddStudentSubmit} className="space-y-4">
               <div><label className="text-xs font-bold block mb-1">Nama Lengkap</label><input type="text" className={inputClass} value={newStudent.name} onChange={e=>setNewStudent({...newStudent, name:e.target.value})} required/></div>
               <div>
                  <label className="text-xs font-bold block mb-1">Pilih Kelas</label>
@@ -1691,11 +1691,11 @@
               </div>
               <div><label className="text-xs font-bold block mb-1">Username Login</label><input type="text" className={inputClass} value={newStudent.username} onChange={e=>setNewStudent({...newStudent, username:e.target.value})} required/></div>
               <div><label className="text-xs font-bold block mb-1">Password Login</label><input type="text" className={inputClass} value={newStudent.password} onChange={e=>setNewStudent({...newStudent, password:e.target.value})} required/></div>
-              <button type="submit" className="w-full py-3.5 bg-blue-600 text-white rounded-xl text-xs font-bold mt-4 shadow-md">Simpan Data Jama'ah</button>
+              <button type="submit" className="w-full py-3.5 bg-blue-600 text-white rounded-xl text-xs font-bold mt-4 shadow-md">Simpan Data Santri</button>
             </form></div></div>
           )}
           {showResetJamaahModal && (
-            <div className="absolute inset-0 z-50 bg-black/60 flex flex-col justify-end"><div className={`rounded-t-3xl p-6 h-[90%] ${isDarkMode?'bg-slate-900':'bg-white'}`}><div className="flex justify-between items-center mb-5"><h3 className="font-bold">Atur Ulang Akses Jama'ah</h3><button onClick={()=>setShowResetJamaahModal(false)} className="text-xs text-slate-500">Batal</button></div><div className="flex-1 overflow-auto space-y-4"><label className="text-xs font-bold block mb-1">Pilih Jama'ah</label><select className={inputClass} value={selectedJamaahId} onChange={e=>{setSelectedJamaahId(e.target.value); const s=users.find(u=>u.id===e.target.value); if(s){setNewJamaahUser(s.username);setNewJamaahPass(s.password);} }}><option value="">-- Silakan Pilih --</option>{students.map(s=><option key={s.id} value={s.id}>{s.name} ({s.nis})</option>)}</select>{selectedJamaahId && (<form onSubmit={handleSaveJamaah} className="space-y-4 pt-4 mt-2 border-t dark:border-slate-700"><div><label className="text-xs font-bold block mb-1">Username Baru</label><input type="text" className={inputClass} value={newJamaahUser} onChange={e=>setNewJamaahUser(e.target.value)} required/></div><div><label className="text-xs font-bold block mb-1">Password Baru</label><input type="text" className={inputClass} value={newJamaahPass} onChange={e=>setNewJamaahPass(e.target.value)} required/></div><button type="submit" className="w-full py-3.5 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-md">Simpan Akses Baru</button></form>)}</div></div></div>
+            <div className="absolute inset-0 z-50 bg-black/60 flex flex-col justify-end"><div className={`rounded-t-3xl p-6 h-[90%] ${isDarkMode?'bg-slate-900':'bg-white'}`}><div className="flex justify-between items-center mb-5"><h3 className="font-bold">Atur Ulang Akses Santri</h3><button onClick={()=>setShowResetJamaahModal(false)} className="text-xs text-slate-500">Batal</button></div><div className="flex-1 overflow-auto space-y-4"><label className="text-xs font-bold block mb-1">Pilih Santri</label><select className={inputClass} value={selectedJamaahId} onChange={e=>{setSelectedJamaahId(e.target.value); const s=users.find(u=>u.id===e.target.value); if(s){setNewJamaahUser(s.username);setNewJamaahPass(s.password);} }}><option value="">-- Silakan Pilih --</option>{students.map(s=><option key={s.id} value={s.id}>{s.name} ({s.nis})</option>)}</select>{selectedJamaahId && (<form onSubmit={handleSaveJamaah} className="space-y-4 pt-4 mt-2 border-t dark:border-slate-700"><div><label className="text-xs font-bold block mb-1">Username Baru</label><input type="text" className={inputClass} value={newJamaahUser} onChange={e=>setNewJamaahUser(e.target.value)} required/></div><div><label className="text-xs font-bold block mb-1">Password Baru</label><input type="text" className={inputClass} value={newJamaahPass} onChange={e=>setNewJamaahPass(e.target.value)} required/></div><button type="submit" className="w-full py-3.5 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-md">Simpan Akses Baru</button></form>)}</div></div></div>
           )}
         </div>
       );
@@ -1708,7 +1708,7 @@
       const [description, setDescription] = useState('');
 
       const exportPDF = () => {
-        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Riwayat Tabungan Jama'ah</h2><p>Nama: <b>${student.name}</b><br/>ID: ${student.nis}</p><h3 align="right">Saldo Akhir: ${formatRupiah(student.balance)}</h3><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;text-align:right;">Nominal</th></tr></thead><tbody>${[...transactions].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>`<tr><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setor':'Tarik'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;">${t.type==='in'?'+':'-'}${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody></table></div>`;
+        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Riwayat Tabungan Santri</h2><p>Nama: <b>${student.name}</b><br/>ID: ${student.nis}</p><h3 align="right">Saldo Akhir: ${formatRupiah(student.balance)}</h3><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;text-align:right;">Nominal</th></tr></thead><tbody>${[...transactions].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>`<tr><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setor':'Tarik'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;">${t.type==='in'?'+':'-'}${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody></table></div>`;
         printHTMLContent(html);
       };
 
@@ -1841,7 +1841,7 @@
       };
 
       const exportPDF = () => {
-        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Laporan Tabungan Jama'ah</h2><p>Nama: <b>${user.name}</b><br/>ID: ${user.nis}</p><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">No</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;text-align:right;">Nominal</th></tr></thead><tbody>${[...myTransactions].sort((a,b)=>new Date(a.date)-new Date(b.date)).map((t,i)=>`<tr><td style="border:1px solid #ccc;padding:8px;">${i+1}</td><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setoran':'Penarikan'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;color:${t.type==='in'?'green':'red'}">${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="4" style="border:1px solid #ccc;padding:8px;text-align:right;">Total Saldo:</td><td style="border:1px solid #ccc;padding:8px;text-align:right;"><b>${formatRupiah(user.balance)}</b></td></tr></tfoot></table></div>`;
+        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Laporan Tabungan Santri</h2><p>Nama: <b>${user.name}</b><br/>ID: ${user.nis}</p><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">No</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;text-align:right;">Nominal</th></tr></thead><tbody>${[...myTransactions].sort((a,b)=>new Date(a.date)-new Date(b.date)).map((t,i)=>`<tr><td style="border:1px solid #ccc;padding:8px;">${i+1}</td><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setoran':'Penarikan'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;color:${t.type==='in'?'green':'red'}">${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="4" style="border:1px solid #ccc;padding:8px;text-align:right;">Total Saldo:</td><td style="border:1px solid #ccc;padding:8px;text-align:right;"><b>${formatRupiah(user.balance)}</b></td></tr></tfoot></table></div>`;
         printHTMLContent(html);
       };
       
@@ -1877,7 +1877,7 @@
 
           <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white p-5 rounded-b-3xl shadow-lg z-10 shrink-0">
             <div className="flex justify-between items-center">
-              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18}/><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Hai, {user.name}</p></div>
+              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18}/><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Assalamu'alaikum, {user.name}</p></div>
               <div className="flex gap-1 bg-white/10 p-1 rounded-2xl items-center">
                 <button onClick={toggleDarkMode} className="p-1.5 hover:bg-white/20 rounded-xl transition text-blue-100">{isDarkMode?<Sun size={18} className="text-amber-400"/>:<Moon size={18}/>}</button>
                 <button onClick={onLogout} className="p-1.5 hover:bg-red-500/80 rounded-xl transition text-red-200" title="Keluar"><LogOut size={18}/></button>
@@ -1945,7 +1945,7 @@
 
              {activeTab === 'insight' && (
                 <div className={`p-5 rounded-2xl border shadow-sm transition-colors ${isDarkMode?'bg-slate-800 border-slate-700':'bg-white border-slate-200'}`}>
-                   <div className="flex items-center gap-3 mb-5 border-b border-slate-200 dark:border-slate-700 pb-3"><div className="bg-amber-100 dark:bg-amber-900/30 p-2 rounded-xl"><Trophy className="text-amber-600 dark:text-amber-400" size={22}/></div><div><h3 className="font-bold text-sm">Top Tabungan Jama'ah</h3></div></div>
+                   <div className="flex items-center gap-3 mb-5 border-b border-slate-200 dark:border-slate-700 pb-3"><div className="bg-amber-100 dark:bg-amber-900/30 p-2 rounded-xl"><Trophy className="text-amber-600 dark:text-amber-400" size={22}/></div><div><h3 className="font-bold text-sm">Top Tabungan Santri</h3></div></div>
                    <div className="space-y-4">
                       {allSortedStudents.map((s, idx) => (
                          <div key={s.id} className="relative">
