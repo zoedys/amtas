@@ -447,7 +447,7 @@
 
     // FUNGSI KOMUNIKASI (REST API FETCH)
     function fetchAPI(actionName, payloadData = {}) {
-        if(API_URL === "https://script.google.com/macros/s/AKfycbxCwWHI0Hnv6ZFYVDxcD7QJPGsVvE8kwmgtIPLMs1wVV2-3g-RktNw211HgJtH6PIJS/exec") {
+        if(API_URL === "ISI_DENGAN_URL_WEB_APP_ANDA") {
             console.warn("API URL belum diisi! Data hanya tersimpan sementara di browser.");
             return Promise.resolve({status: "local"});
         }
@@ -464,7 +464,7 @@
 
     // FUNGSI INISIALISASI (LOAD DATA AWAL)
     window.onload = function() {
-        if(API_URL === "https://script.google.com/macros/s/AKfycbxCwWHI0Hnv6ZFYVDxcD7QJPGsVvE8kwmgtIPLMs1wVV2-3g-RktNw211HgJtH6PIJS/exec") {
+        if(API_URL === "ISI_DENGAN_URL_WEB_APP_ANDA") {
             setTimeout(() => {
                 const loader = document.getElementById('global-loader');
                 if(loader) { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 500); }
