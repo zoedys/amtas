@@ -107,7 +107,7 @@
         <p class="text-[10px] text-slate-400 mt-1">AMTAS Al-Muttaqin</p>
     </div>
 
-    <!-- AREA CETAK PDF NATIVE -->
+    <!-- AREA CETAK PDF NATIVE (ANTI-BLOKIR) -->
     <div id="print-area"></div>
 
     <div id="mobile-container" class="bg-slate-50 transition-colors duration-300">
@@ -120,12 +120,11 @@
                 <div class="absolute top-10 -left-10 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl"></div>
                 <div class="absolute bottom-20 -right-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
 
-<div class="mb-12 flex flex-col items-center">
-    <div class="w-24 h-24 bg-white/5 backdrop-blur-md rounded-[32px] flex justify-center items-center shadow-lg border border-white/10 mb-6 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
-        <!-- INI KODE LOGO BARUNYA -->
-        <img src="./logom.png" alt="Logo AMTAS" class="w-16 h-16 object-contain relative z-10" />
-    </div>
+                <div class="mb-12 flex flex-col items-center">
+                    <div class="w-24 h-24 bg-white/5 backdrop-blur-md rounded-[32px] flex justify-center items-center shadow-lg border border-white/10 mb-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+                        <img src="./logom.png" alt="Logo AMTAS" class="w-16 h-16 object-contain relative z-10" />
+                    </div>
                     <h1 class="text-1xl font-bold text-white tracking-tight text-center leading-tight shadow-black/10 drop-shadow-md">AMTAS<br>Aplikasi Manajemen Tabungan & Syahriyah Madin Al-Muttaqin</h1>
                     <p class="text-[10px] text-teal-200/70 font-mono mt-3 tracking-[0.2em] uppercase">Silahkan pilih Aplikasi di bawah ini</p>
                 </div>
@@ -146,13 +145,13 @@
                         <div class="bg-gradient-to-br from-blue-400 to-blue-600 p-3.5 rounded-2xl shadow-inner group-hover:scale-110 transition-transform relative z-10"><span class="material-symbols-outlined text-white">account_balance_wallet</span></div>
                         <div class="text-left flex-1 relative z-10">
                             <h2 class="text-white font-bold text-lg">Tabungan Digital</h2>
-                            <p class="text-blue-200/70 text-xs">Kelola Tabungan Santri</p>
+                            <p class="text-blue-200/70 text-xs">Kelola Tabungan Santri Madin</p>
                         </div>
                         <span class="material-symbols-outlined text-white/30 relative z-10">chevron_right</span>
                     </button>
                 </div>
 
-                <div class="absolute bottom-6 text-[9px] text-slate-500 font-medium">© 2026 AMTAS Madin Al-Muttaqin By Zoedys</div>
+                <div class="absolute bottom-6 text-[9px] text-slate-500 font-medium">© 2024 AMTAS Madin Al-Muttaqin</div>
             </div>
         </div>
 
@@ -224,7 +223,7 @@
                                 <span class="material-symbols-outlined text-lg">mosque</span>
                                 <h2 class="text-base font-bold">Syahriyah AMTAS</h2>
                             </div>
-                            <p class="text-xs text-emerald-100 font-medium">Assalamu'alaikum, <span id="s-user-name">Admin</span></p>
+                            <p class="text-xs text-emerald-100 font-medium">Hai, <span id="s-user-name">Admin</span></p>
                         </div>
                         <div class="flex gap-1 bg-white/10 p-1 rounded-2xl items-center">
                             <button onclick="toggleSyahDarkMode()" class="p-1.5 hover:bg-white/20 rounded-xl transition text-emerald-100" title="Ganti Mode">
@@ -361,7 +360,7 @@
                             <input type="text" id="add-s-name" class="w-full p-3 border rounded-xl text-xs outline-none focus:ring-2 focus:ring-blue-500 bg-slate-50 border-slate-300 dark:bg-slate-800 dark:border-slate-700 dark:text-white transition" required>
                         </div>
                         <div>
-                            <label class="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">Kelas</label>
+                            <label class="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">Kelas / Ruang</label>
                             <select id="add-s-kelas" class="w-full p-3 border rounded-xl text-xs outline-none focus:ring-2 focus:ring-blue-500 bg-slate-50 border-slate-300 dark:bg-slate-800 dark:border-slate-700 dark:text-white transition" required></select>
                         </div>
                         <div>
@@ -430,10 +429,7 @@
     const API_URL = "https://script.google.com/macros/s/AKfycbxCwWHI0Hnv6ZFYVDxcD7QJPGsVvE8kwmgtIPLMs1wVV2-3g-RktNw211HgJtH6PIJS/exec"; 
 
     // Penampung Data Sementara
-    window.AMTAS_USERS = [
-        { id: 'u1', username: 'admin', password: '123', role: 'admin', name: 'Administrator', balance: 0, nis: 'ADM-01' },
-        { id: 'u3', username: 'pengawas', password: '123', role: 'pengawas', name: 'Kepala Madin', balance: 0, nis: 'P-01' }
-    ];
+    window.AMTAS_USERS = [];
     let dataSyahriyah = [];
     let dataDonasiSyahriyah = [];
     let dataPengeluaranSyahriyah = [];
@@ -441,18 +437,32 @@
     window.PENGATURAN = { 
         nominalSyahriyahTetap: 25000, 
         announcement: { message: 'Selamat Datang!', active: true, date: new Date().toISOString() },
-        kelasList: ['Kelas 1 Ula', 'Kelas 2 Ula', 'Kelas 3 Ula']
+        kelasList: ['1 Ula', '2 Ula', '3 Ula']
     };
     let nominalSyahriyahTetap = 25000;
 
-    // FUNGSI KOMUNIKASI (REST API FETCH)
+    // FUNGSI PENGAMAN UI DARI CRASH % CSS (Mencegah Layar Blank)
+    const getSafeWidth = (balance, topBalance) => {
+        const num = Number(balance) || 0;
+        const max = Number(topBalance) || 1;
+        let percent = (num / max) * 100;
+        if (isNaN(percent) || !isFinite(percent) || percent < 0) return '0%';
+        if (percent > 100) return '100%';
+        return `${percent}%`;
+    };
+
+    // FUNGSI KOMUNIKASI (REST API FETCH) - ANTI CORS
     function fetchAPI(actionName, payloadData = {}) {
-        if(API_URL === "ISI_DENGAN_URL_WEB_APP_ANDA") {
+        if(API_URL === "ISI_DENGAN_URL_WEB_APP_ANDA" || API_URL === "") {
             console.warn("API URL belum diisi! Data hanya tersimpan sementara di browser.");
             return Promise.resolve({status: "local"});
         }
         return fetch(API_URL, {
+            redirect: "follow",
             method: 'POST',
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8",
+            },
             body: JSON.stringify({ action: actionName, payload: payloadData })
         })
         .then(res => res.json())
@@ -483,7 +493,7 @@
                 
                 if(data.pengaturan) {
                     window.PENGATURAN = { ...window.PENGATURAN, ...data.pengaturan };
-                    if(!window.PENGATURAN.kelasList) window.PENGATURAN.kelasList = ['Kelas 1 Ula', 'Kelas 2 Ula', 'Kelas 3 Ula'];
+                    if(!window.PENGATURAN.kelasList) window.PENGATURAN.kelasList = ['1 Ula', '2 Ula', '3 Ula'];
                     nominalSyahriyahTetap = Number(window.PENGATURAN.nominalSyahriyahTetap) || 25000;
                 }
             }
@@ -829,14 +839,14 @@
 
     // MANAJEMEN KELAS SYAHRIYAH
     function addKelasSettingSyah() {
-        const val = document.getElementById('setting-new-kelas').value;
-        if(val && !(window.PENGATURAN.kelasList || []).includes(val)) {
-            if(!window.PENGATURAN.kelasList) window.PENGATURAN.kelasList = [];
+        const val = document.getElementById('setting-new-kelas').value.trim();
+        if(!window.PENGATURAN.kelasList) window.PENGATURAN.kelasList = [];
+        if(val && !window.PENGATURAN.kelasList.includes(val)) {
             window.PENGATURAN.kelasList.push(val);
             fetchAPI('updatePengaturan', window.PENGATURAN);
             renderSyahriyahData();
             showAlert('Kelas berhasil ditambahkan!');
-        } else if ((window.PENGATURAN.kelasList || []).includes(val)) {
+        } else if (window.PENGATURAN.kelasList.includes(val)) {
             showAlert('Gagal: Kelas sudah ada!', 'error');
         }
     }
@@ -1053,7 +1063,7 @@
     function openAddSantriSyahModal() {
         const sel = document.getElementById('add-s-kelas');
         if(sel) {
-            const kl = window.PENGATURAN.kelasList || ['Kelas 1 Ula'];
+            const kl = window.PENGATURAN.kelasList || [];
             sel.innerHTML = '<option value="">-- Pilih Kelas --</option>' + kl.map(k => `<option value="${k}">${k}</option>`).join('');
         }
         document.getElementById('modal-add-santri-syahriyah').style.display='flex';
@@ -1261,13 +1271,12 @@
       const [kelasList, setKelasList] = useState([]); // State Kelas
 
       useEffect(() => {
-        // PENGECEKAN BERKALA UNTUK MENGAMBIL DATA DARI PENAMPUNG GLOBAL
         const checkDataInterval = setInterval(() => {
              if(window.AMTAS_USERS && window.TABUNGAN_DATA !== undefined) {
                  setUsers([...window.AMTAS_USERS]); 
                  setTransactions([...window.TABUNGAN_DATA]); 
                  setAnnouncement(window.PENGATURAN.announcement || { message: 'Selamat datang di Tabungan AMTAS!', active: true, date: new Date().toISOString() });
-                 setKelasList(window.PENGATURAN.kelasList || ['Kelas 1 Ula']);
+                 setKelasList(window.PENGATURAN.kelasList || []);
                  setIsLoading(false);
                  clearInterval(checkDataInterval);
              }
@@ -1284,7 +1293,7 @@
               setTransactions([...window.TABUNGAN_DATA]); 
               setUsers([...window.AMTAS_USERS]); 
               setAnnouncement(window.PENGATURAN.announcement || { message: 'Selamat datang di Tabungan AMTAS!', active: true, date: new Date().toISOString() });
-              setKelasList(window.PENGATURAN.kelasList || ['Kelas 1 Ula']);
+              setKelasList(window.PENGATURAN.kelasList || []);
               
               const updatedMe = window.AMTAS_USERS.find(u => u.id === currentUser.id);
               if (updatedMe) setCurrentUser(prev => ({ ...prev, balance: updatedMe.balance, name: updatedMe.name, nis: updatedMe.nis, username: updatedMe.username, password: updatedMe.password }));
@@ -1442,14 +1451,15 @@
 
       // FUNGSI MANAJEMEN KELAS DI REACT
       const handleAddKelas = () => {
-        if(newKelas && !kelasList.includes(newKelas)) {
-            const updated = [...kelasList, newKelas];
+        const val = newKelas.trim();
+        if(val && !kelasList.includes(val)) {
+            const updated = [...kelasList, val];
             setKelasList(updated);
             window.PENGATURAN.kelasList = updated;
             fetchAPI('updatePengaturan', window.PENGATURAN);
             setNewKelas('');
             alert('Kelas berhasil ditambahkan!');
-        } else if (kelasList.includes(newKelas)) {
+        } else if (kelasList.includes(val)) {
             alert('Gagal: Kelas sudah ada!');
         }
       };
@@ -1470,7 +1480,7 @@
         const inputName = newStudent.name.trim();
         const inputUsername = newStudent.username.trim();
 
-        if (students.some(s => s.name.toLowerCase() === inputName.toLowerCase())) return alert(`Gagal: Nama Santri "${inputName}" sudah ada!`);
+        if (students.some(s => s.name.toLowerCase() === inputName.toLowerCase())) return alert(`Gagal: Nama Jama'ah "${inputName}" sudah ada!`);
         if (users.some(u => u.username.toLowerCase() === inputUsername.toLowerCase())) return alert(`Gagal: Username "${inputUsername}" sudah dipakai!`);
 
         const nextID = `JM-${String(students.length + 1).padStart(3, '0')}`;
@@ -1504,7 +1514,7 @@
       const exportPDF = () => {
         const totalIn = filteredHistory.filter(t => t.type === 'in').reduce((acc, t) => acc + t.amount, 0);
         const totalOut = filteredHistory.filter(t => t.type === 'out').reduce((acc, t) => acc + t.amount, 0);
-        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Laporan Tabungan AMTAS Al-Muttaqin</h2><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">No</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Santri</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;text-align:right;">Nominal</th></tr></thead><tbody>${[...filteredHistory].sort((a,b)=>new Date(a.date)-new Date(b.date)).map((t,i)=>`<tr><td style="border:1px solid #ccc;padding:8px;">${i+1}</td><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${students.find(s=>s.id===t.studentId)?.name||'-'}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setoran':'Penarikan'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;color:${t.type==='in'?'green':'red'}">${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="5" style="border:1px solid #ccc;padding:8px;text-align:right;">Total Saldo Bersih:</td><td style="border:1px solid #ccc;padding:8px;text-align:right;"><b>${formatRupiah(totalIn-totalOut)}</b></td></tr></tfoot></table></div>`;
+        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Laporan Tabungan AMTAS Al-Muttaqin</h2><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">No</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jama'ah</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;text-align:right;">Nominal</th></tr></thead><tbody>${[...filteredHistory].sort((a,b)=>new Date(a.date)-new Date(b.date)).map((t,i)=>`<tr><td style="border:1px solid #ccc;padding:8px;">${i+1}</td><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${students.find(s=>s.id===t.studentId)?.name||'-'}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setoran':'Penarikan'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;color:${t.type==='in'?'green':'red'}">${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="5" style="border:1px solid #ccc;padding:8px;text-align:right;">Total Saldo Bersih:</td><td style="border:1px solid #ccc;padding:8px;text-align:right;"><b>${formatRupiah(totalIn-totalOut)}</b></td></tr></tfoot></table></div>`;
         printHTMLContent(html);
       };
 
@@ -1534,7 +1544,7 @@
         <div className={`flex flex-col h-full relative pb-16 transition-colors duration-300 ${isDarkMode ? 'bg-slate-900 text-slate-100' : 'bg-slate-50 text-slate-800'}`}>
           <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white p-5 rounded-b-3xl shadow-lg z-10 shrink-0">
             <div className="flex justify-between items-start">
-              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18} /><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Assalamu'alaikum, {currentUser?.name}</p></div>
+              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18} /><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Hai, {currentUser?.name}</p></div>
               <div className="flex gap-1 bg-white/10 p-1 rounded-2xl items-center">
                 <button onClick={toggleDarkMode} className="p-1.5 hover:bg-white/20 rounded-xl transition text-blue-100">{isDarkMode ? <Sun size={18} className="text-amber-400"/> : <Moon size={18}/>}</button>
                 <button onClick={onLogout} className="p-1.5 hover:bg-red-500/80 rounded-xl transition text-red-200" title="Keluar"><LogOut size={18}/></button>
@@ -1570,7 +1580,7 @@
 
                   <div>
                     <div className="flex justify-between items-center mb-3"><h3 className="font-bold text-base">Daftar Santri</h3>{isAdmin && <button onClick={() => setShowAddStudent(true)} className="bg-blue-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-md active:scale-95 transition"><Plus size={16}/> Santri</button>}</div>
-                    <div className="relative mb-3"><Search className="absolute left-3 top-3 text-slate-400" size={18}/><input type="text" placeholder="Cari Santri..." value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} className={`w-full border rounded-xl py-2.5 pl-10 pr-4 text-xs outline-none focus:border-blue-500 transition ${isDarkMode?'bg-slate-800 border-slate-700 text-white':'bg-white border-slate-300 text-slate-800'}`} /></div>
+                    <div className="relative mb-3"><Search className="absolute left-3 top-3 text-slate-400" size={18}/><input type="text" placeholder="Cari jama'ah..." value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} className={`w-full border rounded-xl py-2.5 pl-10 pr-4 text-xs outline-none focus:border-blue-500 transition ${isDarkMode?'bg-slate-800 border-slate-700 text-white':'bg-white border-slate-300 text-slate-800'}`} /></div>
                     <div className="space-y-2.5">
                       {filteredStudents.map(student => (
                         <div key={student.id} onClick={() => setSelectedStudent(student)} className={`p-3.5 rounded-2xl border flex items-center justify-between cursor-pointer active:scale-[0.98] transition ${isDarkMode ? 'bg-slate-800 border-slate-700 hover:bg-slate-700' : 'bg-white border-slate-200 hover:shadow-md'}`}>
@@ -1611,7 +1621,7 @@
              )}
 
              {activeTab === 'insight' && (
-                <div className={`p-5 rounded-2xl border shadow-sm ${isDarkMode?'bg-slate-800 border-slate-700':'bg-white border-slate-200'}`}>
+                <div className={`p-5 rounded-2xl border shadow-sm transition-colors ${isDarkMode?'bg-slate-800 border-slate-700':'bg-white border-slate-200'}`}>
                    <div className="flex items-center gap-3 mb-5 border-b border-slate-200 dark:border-slate-700 pb-3"><div className="bg-amber-100 dark:bg-amber-900/30 p-2 rounded-xl"><Trophy className="text-amber-600 dark:text-amber-400" size={22}/></div><div><h3 className="font-bold text-sm">Top Tabungan Santri</h3></div></div>
                    <div className="space-y-4">
                       {allSortedStudents.map((s, idx) => (
@@ -1619,12 +1629,12 @@
                            <div className="flex justify-between items-end text-xs mb-1">
                              <div className="flex items-center gap-2">
                                <span className={`font-bold w-5 h-5 flex justify-center items-center rounded-full text-[10px] ${idx===0?'bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-400':'bg-slate-100 text-slate-400 dark:bg-slate-700'}`}>{idx+1}</span>
-                               <span className={`font-bold ${s.id===user.id?'text-blue-600 dark:text-blue-400':''}`}>{s.name} {s.id===user.id&&'(Anda)'}</span>
+                               <span className={`font-bold ${s.id===currentUser?.id?'text-blue-600 dark:text-blue-400':''}`}>{s.name} {s.id===currentUser?.id ? '(Anda)' : ''}</span>
                              </div>
                              <span className="font-extrabold text-blue-600 dark:text-blue-400">{formatRupiah(s.balance)}</span>
                            </div>
                            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
-                             <div className={`h-full rounded-full ${idx===0?'bg-gradient-to-r from-amber-400 to-amber-500':'bg-blue-600'}`} style={{width: `${(s.balance/(allSortedStudents[0]?.balance||1))*100}%`}}></div>
+                             <div className={`h-full rounded-full ${idx===0?'bg-gradient-to-r from-amber-400 to-amber-500':'bg-blue-600'}`} style={{width: getSafeWidth(s.balance, allSortedStudents[0]?.balance) }}></div>
                            </div>
                          </div>
                       ))}
@@ -1708,7 +1718,7 @@
       const [description, setDescription] = useState('');
 
       const exportPDF = () => {
-        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Riwayat Tabungan Santri</h2><p>Nama: <b>${student.name}</b><br/>ID: ${student.nis}</p><h3 align="right">Saldo Akhir: ${formatRupiah(student.balance)}</h3><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;text-align:right;">Nominal</th></tr></thead><tbody>${[...transactions].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>`<tr><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setor':'Tarik'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;">${t.type==='in'?'+':'-'}${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody></table></div>`;
+        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Riwayat Tabungan Jama'ah</h2><p>Nama: <b>${student.name}</b><br/>ID: ${student.nis}</p><h3 align="right">Saldo Akhir: ${formatRupiah(student.balance)}</h3><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#1d4ed8;color:white;text-align:right;">Nominal</th></tr></thead><tbody>${[...transactions].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(t=>`<tr><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setor':'Tarik'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;">${t.type==='in'?'+':'-'}${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody></table></div>`;
         printHTMLContent(html);
       };
 
@@ -1841,7 +1851,7 @@
       };
 
       const exportPDF = () => {
-        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Laporan Tabungan Santri</h2><p>Nama: <b>${user.name}</b><br/>ID: ${user.nis}</p><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">No</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;text-align:right;">Nominal</th></tr></thead><tbody>${[...myTransactions].sort((a,b)=>new Date(a.date)-new Date(b.date)).map((t,i)=>`<tr><td style="border:1px solid #ccc;padding:8px;">${i+1}</td><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setoran':'Penarikan'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;color:${t.type==='in'?'green':'red'}">${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="4" style="border:1px solid #ccc;padding:8px;text-align:right;">Total Saldo:</td><td style="border:1px solid #ccc;padding:8px;text-align:right;"><b>${formatRupiah(user.balance)}</b></td></tr></tfoot></table></div>`;
+        const html = `<div style="font-family:sans-serif;padding:20px;background:white;color:black;width:100%;min-height:100vh;"><h2 align="center">Laporan Tabungan Jama'ah</h2><p>Nama: <b>${user.name}</b><br/>ID: ${user.nis}</p><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:15px;"><thead><tr><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">No</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Tanggal</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Ket</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;">Jenis</th><th style="border:1px solid #ccc;padding:8px;background:#f0f8ff;text-align:right;">Nominal</th></tr></thead><tbody>${[...myTransactions].sort((a,b)=>new Date(a.date)-new Date(b.date)).map((t,i)=>`<tr><td style="border:1px solid #ccc;padding:8px;">${i+1}</td><td style="border:1px solid #ccc;padding:8px;">${new Date(t.date).toLocaleDateString()}</td><td style="border:1px solid #ccc;padding:8px;">${t.description}</td><td style="border:1px solid #ccc;padding:8px;">${t.type==='in'?'Setoran':'Penarikan'}</td><td style="border:1px solid #ccc;padding:8px;text-align:right;color:${t.type==='in'?'green':'red'}">${formatRupiah(t.amount)}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="4" style="border:1px solid #ccc;padding:8px;text-align:right;">Total Saldo:</td><td style="border:1px solid #ccc;padding:8px;text-align:right;"><b>${formatRupiah(user.balance)}</b></td></tr></tfoot></table></div>`;
         printHTMLContent(html);
       };
       
@@ -1877,7 +1887,7 @@
 
           <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white p-5 rounded-b-3xl shadow-lg z-10 shrink-0">
             <div className="flex justify-between items-center">
-              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18}/><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Assalamu'alaikum, {user.name}</p></div>
+              <div><div className="flex items-center gap-1.5 mb-1"><BookOpen size={18}/><h2 className="text-base font-bold">Tabungan AMTAS</h2></div><p className="text-xs text-blue-100 font-medium">Hai, {user.name}</p></div>
               <div className="flex gap-1 bg-white/10 p-1 rounded-2xl items-center">
                 <button onClick={toggleDarkMode} className="p-1.5 hover:bg-white/20 rounded-xl transition text-blue-100">{isDarkMode?<Sun size={18} className="text-amber-400"/>:<Moon size={18}/>}</button>
                 <button onClick={onLogout} className="p-1.5 hover:bg-red-500/80 rounded-xl transition text-red-200" title="Keluar"><LogOut size={18}/></button>
@@ -1952,12 +1962,12 @@
                            <div className="flex justify-between items-end text-xs mb-1">
                              <div className="flex items-center gap-2">
                                <span className={`font-bold w-5 h-5 flex justify-center items-center rounded-full text-[10px] ${idx===0?'bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-400':'bg-slate-100 text-slate-400 dark:bg-slate-700'}`}>{idx+1}</span>
-                               <span className={`font-bold ${s.id===user.id?'text-blue-600 dark:text-blue-400':''}`}>{s.name} {s.id===user.id&&'(Anda)'}</span>
+                               <span className={`font-bold ${s.id===user.id?'text-blue-600 dark:text-blue-400':''}`}>{s.name} {s.id===user.id ? '(Anda)' : ''}</span>
                              </div>
                              <span className="font-extrabold text-blue-600 dark:text-blue-400">{formatRupiah(s.balance)}</span>
                            </div>
                            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
-                             <div className={`h-full rounded-full ${idx===0?'bg-gradient-to-r from-amber-400 to-amber-500':'bg-blue-600'}`} style={{width: `${(s.balance/(allSortedStudents[0]?.balance||1))*100}%`}}></div>
+                             <div className={`h-full rounded-full ${idx===0?'bg-gradient-to-r from-amber-400 to-amber-500':'bg-blue-600'}`} style={{width: getSafeWidth(s.balance, allSortedStudents[0]?.balance) }}></div>
                            </div>
                          </div>
                       ))}
